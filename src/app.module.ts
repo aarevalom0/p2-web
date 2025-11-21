@@ -3,6 +3,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { PonenteModule } from './ponente/ponente.module';
+import { AuditorioModule } from './auditorio/auditorio.module';
+import { AsistenteModule } from './asistente/asistente.module';
+import { EventoModule } from './evento/evento.module';
 
 @Module({
   imports: [
@@ -16,7 +20,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       password: process.env.DB_PASSWORD,
       autoLoadEntities: true,
       synchronize: true, // SOLO EN DESARROLLO
-    })
+    }),
+    PonenteModule,
+    AuditorioModule,
+    AsistenteModule,
+    EventoModule
   ],
   controllers: [AppController],
   providers: [AppService],

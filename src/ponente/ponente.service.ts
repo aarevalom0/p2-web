@@ -1,8 +1,4 @@
-import {
-  Injectable,
-  NotFoundException,
-  BadRequestException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MongoRepository } from 'typeorm';
 import { PonenteDto } from './dto/ponente.dto';
@@ -42,11 +38,6 @@ export class PonenteService {
     });
     if (!ponente) {
       throw new NotFoundException(`Ponente con ID ${id} no encontrado`);
-    }
-    if (ponente.eventos && ponente.eventos.length > 0) {
-      throw new BadRequestException(
-        'No se puede eliminar un ponente con eventos asociados',
-      );
     }
     return this.ponenteRepository.delete(id);
   }

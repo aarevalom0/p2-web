@@ -5,7 +5,6 @@ import {
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MongoRepository } from 'typeorm';
-import { EventoDto } from './dto/evento.dto';
 import { Evento } from './entities/evento.entity';
 
 @Injectable()

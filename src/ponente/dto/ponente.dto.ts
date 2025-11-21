@@ -14,7 +14,7 @@ export class PonenteDto {
   email: string;
 
   @IsString()
-  tipoPonente: 'Interno' | 'Externo';
+  tipoPonente: 'Interno' | 'Externo' | 'Invitado';
 
   @IsString()
   especialidad: string;

@@ -1,26 +1,20 @@
 import { Injectable } from '@nestjs/common';
-import { CreateAuditorioDto } from './dto/create-auditorio.dto';
-import { UpdateAuditorioDto } from './dto/update-auditorio.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { MongoRepository } from 'typeorm';
+import { AuditorioDto } from './dto/auditorio.dto';
 
 @Injectable()
 export class AuditorioService {
-  create(createAuditorioDto: CreateAuditorioDto) {
-    return 'This action adds a new auditorio';
-  }
-
-  findAll() {
-    return `This action returns all auditorio`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} auditorio`;
-  }
-
-  update(id: number, updateAuditorioDto: UpdateAuditorioDto) {
-    return `This action updates a #${id} auditorio`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} auditorio`;
+  constructor(
+    @InjectRepository(AuditorioDto)
+    private readonly auditorioRepository: MongoRepository<AuditorioDto>,
+  ) {}
+  crearAuditorio(createAuditorioDto: AuditorioDto) {
+    const { capacidad } = createAuditorioDto;
+    if (capacidad <= 0) {
+      throw new Error('La capacidad debe ser mayor a cero.');
+    }
+    const nuevoAuditorio = this.auditorioRepository.create(createAuditorioDto);
+    return this.auditorioRepository.save(nuevoAuditorio);
   }
 }
